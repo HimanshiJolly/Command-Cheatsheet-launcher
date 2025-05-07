@@ -35,7 +35,14 @@ dialog --title "Greetings 🙏" --msgbox "$GREETING, $USER_NAME! 👩‍💻\n\n
 
 # Main loop
 while true; do
-    OPTION=$(main_menu "$USER_NAME")  # Now passing name to menu
+    OPTION=$(main_menu)  # Now passing name to menu
+
+    if [ $? -ne 0 ]; then
+    dialog --yesno "Do you want to exit, $USER_NAME?" 7 50
+    [ $? -eq 0 ] && clear && exit 0
+    continue
+    fi
+
 
     case $OPTION in
         1) Search Command ;;
@@ -45,6 +52,7 @@ while true; do
         5) Help ;;
         6) 
             dialog --msgbox "Goodbye, $USER_NAME! 👋 Have a great day!" 6 40
+            sleep 1
             clear
             exit 0 
             ;;
