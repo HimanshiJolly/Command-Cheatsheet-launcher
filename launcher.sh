@@ -9,6 +9,25 @@ source scripts/settings.sh
 source scripts/help.sh
 source scripts/display.sh
 
+# Welcome and ask for user's name
+echo "Welcome to Command-Cheatsheet Launcher!"
+read -p "Please enter your name: " USER_NAME
+
+# Function to get time-based greeting
+get_greeting() {
+    HOUR=$(date +%H)
+    if [ $HOUR -ge 5 ] && [ $HOUR -lt 12 ]; then
+        echo "Good morning"
+    elif [ $HOUR -ge 12 ] && [ $HOUR -lt 17 ]; then
+        echo "Good afternoon"
+    else
+        echo "Good evening"
+    fi
+}
+
+GREETING=$(get_greeting)
+echo "$GREETING, $USER_NAME!"
+echo "Please choose to continue:"
 # Main loop for the program
 while true; do
     OPTION=$(main_menu)  # Show the main menu
