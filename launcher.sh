@@ -9,35 +9,45 @@ source scripts/settings.sh
 source scripts/help.sh
 source scripts/display.sh
 
-# Welcome and ask for user's name
-echo "Welcome to Command-Cheatsheet Launcher!"
-read -p "Please enter your name: " USER_NAME
+# Ask for user's name using dialog
+USER_NAME=$(dialog --clear --stdout --inputbox "👋 Welcome to Command-Cheatsheet Launcher!\n\nPlease enter your name:" 10 50)
+
+# If user presses Esc or enters nothing
+if [ -z "$USER_NAME" ]; then
+    USER_NAME="User"
+fi
 
 # Function to get time-based greeting
 get_greeting() {
     HOUR=$(date +%H)
-    if [ $HOUR -ge 5 ] && [ $HOUR -lt 12 ]; then
+    if [ "$HOUR" -ge 5 ] && [ "$HOUR" -lt 12 ]; then
         echo "Good morning"
-    elif [ $HOUR -ge 12 ] && [ $HOUR -lt 17 ]; then
+    elif [ "$HOUR" -ge 12 ] && [ "$HOUR" -lt 17 ]; then
         echo "Good afternoon"
     else
         echo "Good evening"
     fi
 }
 
+# Show greeting using dialog
 GREETING=$(get_greeting)
-echo "$GREETING, $USER_NAME!"
-echo "Please choose to continue:"
-# Main loop for the program
+dialog --title "Greetings 🙏" --msgbox "$GREETING, $USER_NAME! 👩‍💻\n\nLet's get started!" 8 50
+
+# Main loop
 while true; do
-    OPTION=$(main_menu)  # Show the main menu
+    OPTION=$(main_menu "$USER_NAME")  # Now passing name to menu
+
     case $OPTION in
-        1) Search Command ;;          # Option 1: Search command
-        2) View Favorites ;;          # Option 2: View favorite commands
-        3) Recent Searches ;;         # Option 3: View recent searches
-        4) Settings ;;           # Option 4: Settings
-        5) Help ;;               # Option 5: Help/About
-        6) exit 0 ;;                  # Option 6: Exit
-        *) echo "Invalid option!" ;;  # Invalid selection
+        1) Search Command ;;
+        2) View Favorites ;;
+        3) Recent Searches ;;
+        4) Settings ;;
+        5) Help ;;
+        6) 
+            dialog --msgbox "Goodbye, $USER_NAME! 👋 Have a great day!" 6 40
+            clear
+            exit 0 
+            ;;
     esac
 done
+
