@@ -45,7 +45,7 @@ while true; do
 
 
     case $OPTION in
-        1) Search Command ;;
+        1) Search_Command ;;
         2) View Favorites ;;
         3) Recent Searches ;;
         4) Settings ;;
