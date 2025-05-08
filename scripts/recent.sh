@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Function to view recent searches
+# Function to view recent searches in a dialog
 Recent() {
     local log_file="cheatsheets/search_log.txt"
     if [[ ! -f "$log_file" ]]; then
@@ -13,8 +13,16 @@ Recent() {
         return 0
     fi
 
-    echo "All recent searches:"
-    cat "$log_file"
+    local last_commands
+    last_commands=$(tail -n 10 "$log_file")
+
+    # Check if dialog is installed for dialog display
+    if command -v dialog >/dev/null 2>&1; then
+        echo "$last_commands" | dialog --title "Recent Searches" --msgbox "$(cat)" 20 60
+    else
+        echo "Dialog not found. Displaying recent searches in terminal:"
+        echo "$last_commands"
+    fi
 }
 
 # Alias function name to match launcher.sh case statement
