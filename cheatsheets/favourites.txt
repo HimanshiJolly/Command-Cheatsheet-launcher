@@ -1,3 +1,4 @@
 
 ls -la
 ps [options]
+ps
