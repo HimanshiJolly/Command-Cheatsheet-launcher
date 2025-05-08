@@ -59,6 +59,6 @@ View() {
 }
 
 # Alias function name to match launcher.sh case statement
-View Favorites() {
+view_favorites() {
     View
 }

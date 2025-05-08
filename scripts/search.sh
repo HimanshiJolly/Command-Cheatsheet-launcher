@@ -10,7 +10,7 @@ FAVOURITES_FILE="$CHEATSHEET_DIR/favourites.txt"  # Favourites file
 
 mkdir -p "$CHEATSHEET_DIR"
 
-Search_Command() {
+search_command() {
     cmd=$(dialog --inputbox "Enter the Linux command you want to search:" 10 50 3>&1 1>&2 2>&3 3>&-)
 
     if [ $? -ne 0 ]; then

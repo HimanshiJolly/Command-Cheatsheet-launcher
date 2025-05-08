@@ -7,6 +7,6 @@ Recent() {
 }
 
 # Alias function name to match launcher.sh case statement
-Recent Searches() {
+recent_searches() {
     Recent
 }

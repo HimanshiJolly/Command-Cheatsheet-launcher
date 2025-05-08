@@ -45,11 +45,11 @@ while true; do
 
 
     case $OPTION in
-        1) Search_Command ;;
-        2) View Favorites ;;
-        3) Recent Searches ;;
-        4) Settings ;;
-        5) Help ;;
+        1) search_command ;;
+        2) view_favorites ;;
+        3) recent_searches ;;
+        4) settings ;;
+        5) help ;;
         6) 
             dialog --msgbox "Goodbye, $USER_NAME! 👋 Have a great day!" 6 40
             sleep 1
