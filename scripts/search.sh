@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # === CONFIG ===
-API_KEY="AIzaSyD5wv630b-CLBCZsMNIbvPwjsjM_x5J_CI"  # Replace with your Gemini API Key
+API_KEY="AIzaSyCMV-2YINJqg6b_u-e0h-gqD24zYolL-i8"
 GEMINI_URL="https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=$API_KEY"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 CHEATSHEET_DIR="$SCRIPT_DIR/../cheatsheets"
