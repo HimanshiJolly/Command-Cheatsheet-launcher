@@ -2,7 +2,7 @@
 
 # Function to view and manage favorite commands
 View() {
-    FAV_FILE="$(dirname "$0")/../cheatsheets/favourites.txt"
+    FAV_FILE="cheatsheets/favourites.txt"
     if [ ! -f "$FAV_FILE" ] || [ ! -s "$FAV_FILE" ]; then
         dialog --msgbox "No favorite commands found." 10 40
         return
