@@ -7,6 +7,6 @@ Settings() {
 }
 
 # Alias function name to match launcher.sh case statement
-Settings() {
+settings() {
     Settings
 }

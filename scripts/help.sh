@@ -9,6 +9,6 @@ Help() {
 }
 
 # Alias function name to match launcher.sh case statement
-Help() {
+help() {
     Help
 }
