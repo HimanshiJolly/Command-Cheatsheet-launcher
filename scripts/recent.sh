@@ -14,7 +14,7 @@ Recent() {
     fi
 
     local last_commands
-    last_commands=$(tail -n 10 "$log_file")
+    last_commands=$(tail -n 5 "$log_file")
 
     # Check if dialog is installed for dialog display
     if command -v dialog >/dev/null 2>&1; then
