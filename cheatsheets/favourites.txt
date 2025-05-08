@@ -1,4 +1,2 @@
 
-ls -la
-ps [options]
-ps
+ls -l
