@@ -133,3 +133,58 @@ ls *.txt
 ls file?
 ls
 ls
+-a
+pwd
+pwd
+pwd
+pwd
+-L
+--logical
+/home/user/mydir
+symlink_to_mydir
+pwd -L
+pwd
+-P
+--physical
+-L
+symlink_to_mydir
+/home/user/mydir
+pwd -P
+/home/user/mydir
+--help
+pwd
+--version
+coreutils
+pwd
+-L
+-P
+pwd -P
+pwd
+-L
+-P
+-L
+-P
+/var/www/mywebsite
+/home/user/dev/mywebsite
+/var/www/mywebsite
+cd
+/home/user/dev/mywebsite
+pwd -L
+/home/user/dev/mywebsite
+pwd -P
+/var/www/mywebsite
+-L
+pwd
+-L
+--logical
+pwd -L
+-P
+--physical
+pwd -P
+--help
+pwd
+pwd --help
+--version
+coreutils
+pwd --version
+pwd
