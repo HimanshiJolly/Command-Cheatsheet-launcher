@@ -1,194 +1,68 @@
-
-<<<<<<< HEAD
-ls -l
-=======
-ls -la
-ps [options]
-ps
-ls
-ls
-ls
-ls <directory>
--a
---all
-.
--A
---almost-all
-.
-..
--a
--b
---escape
--c
--t
---time=
--C
--d
---directory
--f
--F
---classify
-*
-/
-@
-|
-=
->
--g
--l
--G
---no-group
--h
---human-readable
--l
--s
---size
--H
---si
--h
--i
---inode
--k
---block-size=1K
--l
--L
---dereference
--m
--n
---numeric-uid-gid
--l
--o
--l
--p
---indicator-slash
-/
--F
--q
---hide-control-chars
--Q
---quote-name
--r
---reverse
--R
---recursive
--s
---size
---block-size
---sort=WORD
-none
-size
-time
-version
-extension
---time=WORD
-atime
-access
-use
-ctime
-status
--S
--t
--T
---tabsize=COLS
--u
--t
--l
--U
--v
--w COLS
---width=COLS
--x
--X
--1
-ls
---color[=WHEN]
-WHEN
-never
-always
-auto
-WHEN
-auto
---block-size=SIZE
--s
---full-time
--l
---hide=PATTERN
---ignore=PATTERN
---indicator-style=WORD
-none
-slash
--p
-file
-classify
--F
---version
---help
-ls -la
-ls -ltra
-ls -lht
-ls
-alias ls='ls --color=auto'
-alias
-ls
-ls
-ls
-ls *.txt
-ls file?
-ls
-ls
--a
 pwd
 pwd
-pwd
-pwd
+pwd [OPTION]
 -L
 --logical
-/home/user/mydir
-symlink_to_mydir
-pwd -L
-pwd
+$PWD
 -P
 --physical
+--help
+--version
+--logical
+$PWD
+pwd
+--physical
+link_to_dir
+/opt/some/real/directory
 -L
-symlink_to_mydir
-/home/user/mydir
-pwd -P
-/home/user/mydir
+-P
+/opt/dir_a
+/home/user/link_b
+/opt/dir_a
+/tmp/link_c
+/home/user/link_b
+-P
 --help
 pwd
 --version
 coreutils
 pwd
--L
--P
-pwd -P
-pwd
--L
--P
--L
--P
-/var/www/mywebsite
-/home/user/dev/mywebsite
-/var/www/mywebsite
+$PWD
 cd
-/home/user/dev/mywebsite
-pwd -L
-/home/user/dev/mywebsite
-pwd -P
-/var/www/mywebsite
--L
+--physical
 pwd
+-P
+pwd
+pwd
+pwd [OPTION]
 -L
 --logical
-pwd -L
+$PWD
 -P
 --physical
-pwd -P
+--help
+--version
+--logical
+$PWD
+pwd
+--physical
+link_to_dir
+/opt/some/real/directory
+-L
+-P
+/opt/dir_a
+/home/user/link_b
+/opt/dir_a
+/tmp/link_c
+/home/user/link_b
+-P
 --help
 pwd
-pwd --help
 --version
 coreutils
-pwd --version
 pwd
->>>>>>> refs/remotes/origin/main
+$PWD
+cd
+--physical
+pwd
+-P
