@@ -13,9 +13,9 @@ mkdir -p "$CHEATSHEET_DIR"
 search_command() {
     cmd=$(dialog --inputbox "Enter the Linux command you want to search:" 10 50 3>&1 1>&2 2>&3 3>&-)
 
-    if [ $? -ne 0 ]; then
-        clear; echo "Cancelled."; exit 1
-    fi
+   if [ $? -ne 0 ]; then
+    clear; echo "Cancelled."; return 1
+fi
 
     # Log the actual Linux command entered
     echo "$(date): $cmd" >> "$LOG_FILE"
