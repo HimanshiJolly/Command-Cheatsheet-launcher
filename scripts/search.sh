@@ -17,12 +17,12 @@ search_command() {
         clear; echo "Cancelled."; exit 1
     fi
 
-    # Log the actual Linux command entered (do not log invalid actions or menu options)
+    # Log the actual Linux command entered
     echo "$(date): $cmd" >> "$LOG_FILE"
 
     # === QUERY GEMINI ===
-    payload=$(jq -n --arg txt "Explain the '$cmd' command in Linux with all flags and examples in bullet points." \
-        '{contents: [{parts: [{text: $txt}]}]}')
+    payload=$(jq -n --arg txt "Explain the '$cmd' command in Linux. List all the commands with flags like (* $cmd -flag -> explanation) and explain them.Don't add any markdowns provide in the assigned format only with one *." \
+        '{contents: [{parts: [{text: $txt}]}], generationConfig: {temperature: 0.2}}')
 
     response=$(curl -s -X POST "$GEMINI_URL" -H "Content-Type: application/json" -d "$payload")
     explanation=$(echo "$response" | jq -r '.candidates[0].content.parts[0].text')
@@ -30,14 +30,16 @@ search_command() {
     echo "$explanation" > /tmp/cmd_details.txt
     dialog --textbox /tmp/cmd_details.txt 25 80
 
-    # === Extract commands for menu ===
-    commands=$(grep -oP '`[^`]+`' /tmp/cmd_details.txt | tr -d '`')
+    # === Improved Extraction ===
+    # Get lines starting with *, containing the command, and remove extra formatting
+    commands=$(grep -i "^*" /tmp/cmd_details.txt | grep -i "$cmd" | sed -E 's/^\*\s*//; s/\s*->.*$//')
+
     if [ -z "$commands" ]; then
         dialog --msgbox "No commands found in the explanation." 10 50
         return
     fi
 
-    # Convert to menu format
+    # === Convert commands to menu format ===
     menu_items=()
     i=1
     while IFS= read -r line; do
@@ -55,7 +57,6 @@ search_command() {
 
         case $action in
             1)  # Copy
-                # Ensure the menu displays available commands
                 choice=$(dialog --menu "Select a command to copy:" 20 80 10 "${menu_items[@]}" 3>&1 1>&2 2>&3)
                 if [ $? -eq 0 ]; then
                     selected=$(echo "$commands" | sed -n "${choice}p")
@@ -64,11 +65,9 @@ search_command() {
                 fi
                 ;;
             2)  # Add to favourites
-                # Ensure the menu displays available commands
                 choice=$(dialog --menu "Select a command to add to favourites:" 20 80 10 "${menu_items[@]}" 3>&1 1>&2 2>&3)
                 if [ $? -eq 0 ]; then
                     selected=$(echo "$commands" | sed -n "${choice}p")
-                    # Store in favourites.txt
                     echo "$selected" >> "$FAVOURITES_FILE"
                     dialog --msgbox "Added to favourites:\n$selected" 8 60
                 fi
