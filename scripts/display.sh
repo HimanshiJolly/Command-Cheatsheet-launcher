@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# Function to show the main menu
 main_menu() {
     dialog --clear \
            --backtitle "🔥 Linux Command Cheatsheet Launcher 🔥" \

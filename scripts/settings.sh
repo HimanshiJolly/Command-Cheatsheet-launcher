@@ -1,6 +1,4 @@
 #!/bin/bash
-
-# Function to clear favorites
 clear_favourites() {
 FAV_FILE="cheatsheets/favourites.txt"
     if [ ! -f "$FAV_FILE" ] || [ ! -s "$FAV_FILE" ]; then
@@ -13,8 +11,6 @@ FAV_FILE="cheatsheets/favourites.txt"
                     dialog --msgbox "All favorites cleared." 10 40
                 fi
 }
-
-# Function to clear recent searches
 clear_recent_searches() {
 local log_file="cheatsheets/search_log.txt"
     if [[ ! -f "$log_file" ]]; then
@@ -37,7 +33,6 @@ local log_file="cheatsheets/search_log.txt"
                 fi
 }
 
-# Function to reset all preferences
 delete_command_favourites() {
     FAV_FILE="cheatsheets/favourites.txt"
 
@@ -62,7 +57,6 @@ delete_command_favourites() {
     if [ $? -eq 0 ]; then
         unset 'commands[choice-1]'
 
-        # Write back remaining non-empty commands
         for cmd in "${commands[@]}"; do
             [[ -n "$cmd" ]] && echo "$cmd"
         done > "$FAV_FILE"
@@ -71,8 +65,6 @@ delete_command_favourites() {
     fi
 }
 
-
-# Main settings menu function
 settings() {
     while true; do
         CHOICE=$(dialog --clear --stdout --title "⚙️ Settings" \

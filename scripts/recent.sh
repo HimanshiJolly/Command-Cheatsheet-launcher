@@ -1,6 +1,4 @@
 #!/bin/bash
-
-# Function to show last 10 searches from log file
 Recent() {
     local log_file="cheatsheets/search_log.txt"
 
@@ -24,7 +22,6 @@ Recent() {
     fi
 }
 
-# Alias function name to match launcher.sh case statement
 recent_searches() {
     Recent
 }

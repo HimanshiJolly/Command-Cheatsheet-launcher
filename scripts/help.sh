@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# help function called from launcher.sh
 help() {
     dialog --title "📘 Help & Usage" --msgbox \
 "🔹 Command-Cheatsheet Launcher  

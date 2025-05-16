@@ -1,6 +1,4 @@
 #!/bin/bash
-
-# Function to only view favorite commands
 View() {
     FAV_FILE="cheatsheets/favourites.txt"
 
@@ -11,8 +9,6 @@ View() {
 
     dialog --title "Favorite Commands" --textbox "$FAV_FILE" 20 60
 }
-
-# Alias function name to match launcher.sh case statement
 view_favorites() {
     View
 }
