@@ -11,20 +11,50 @@ FAVOURITES_FILE="$CHEATSHEET_DIR/favourites.txt"  # Favourites file
 mkdir -p "$CHEATSHEET_DIR"
 
 search_command() {
+while true; do
     cmd=$(dialog --inputbox "Enter the Linux command you want to search:" 10 50 3>&1 1>&2 2>&3 3>&-)
 
    if [ $? -ne 0 ]; then
     clear; echo "Cancelled."; return 1
 fi
+if [[ -z "$cmd" || "$cmd" =~ ^[[:space:]]*$ || ! "$cmd" =~ ^[a-zA-Z0-9\-]+$ ]]; then
+            dialog --msgbox "Invalid input. Please enter a valid Linux command (no spaces or special characters like @ ? / ! #)." 10 60
+        else
+            break
+        fi
+    done
+
 
     # Log the actual Linux command entered
     echo "$(date): $cmd" >> "$LOG_FILE"
+ # Prepare a temp file for API output
+response_file=$(mktemp)
 
-    # === QUERY GEMINI ===
+# Run Gemini API call in the background
+(
     payload=$(jq -n --arg txt "Explain the '$cmd' command in Linux. List all the commands with flags like (* $cmd -flag -> explanation) and explain them.Don't add any markdowns provide in the assigned format only with one *." \
-        '{contents: [{parts: [{text: $txt}]}], generationConfig: {temperature: 0.2}}')
+      '{contents: [{parts: [{text: $txt}]}], generationConfig: {temperature: 0.2}}')
 
-    response=$(curl -s -X POST "$GEMINI_URL" -H "Content-Type: application/json" -d "$payload")
+    curl -s -X POST "$GEMINI_URL" -H "Content-Type: application/json" -d "$payload" > "$response_file"
+) &
+api_pid=$!
+
+# Show progress while waiting
+{
+  for i in $(seq 1 30); do
+    echo $((i * 3 + 10))   # From 13 to 100
+    sleep 1
+    if ! kill -0 $api_pid 2>/dev/null; then break; fi  # Exit if API is done early
+  done
+} | dialog --gauge "Fetching explanation from Gemini (~30s)..." 10 60 0
+
+# Wait for API to finish
+wait $api_pid
+
+# Load response from file
+response=$(<"$response_file")
+rm "$response_file"
+
     explanation=$(echo "$response" | jq -r '.candidates[0].content.parts[0].text')
 
     echo "$explanation" > /tmp/cmd_details.txt

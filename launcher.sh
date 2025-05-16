@@ -3,7 +3,7 @@
 # Source necessary scripts
 source scripts/loader.sh
 source scripts/search.sh
-source scripts/favorites.sh
+source scripts/favourites.sh
 source scripts/recent.sh
 source scripts/settings.sh
 source scripts/help.sh
