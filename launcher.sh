@@ -1,5 +1,4 @@
 #!/bin/bash
-source scripts/loader.sh
 source scripts/search.sh
 source scripts/favourites.sh
 source scripts/recent.sh
